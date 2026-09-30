@@ -1,0 +1,35 @@
+### 
+GET http://localhost:3000/ 
+
+###
+POST http://localhost:3000/add 
+Content-Type: application/json
+
+{
+    "nome" : "Tiag",
+    "email": "tiago@email.com"
+
+}
+
+###
+
+DELETE http://localhost:3000/6aa1edefdc136c790550bdb3
+
+###
+PUT http://localhost:3000/altera/6aa1edefdc136c790550bdb3
+Content-Type: application/json
+
+{
+    "nome" :"Zé ",
+    "email": "zeze@email.com"
+}
+
+
+###
+PATCH http://localhost:3000/alteraP/6aa1edefdc136c790550bdb3
+Content-Type: application/json
+
+{
+    "nome" :"Zé "
+    
+}
