@@ -9,8 +9,8 @@ const Form = () => {
 
     function Cadastrar() {
 
-     console.log('qw');
         const url = "http://192.168.30.91:3000/add";
+        //const url = "http://localhost:3000/add";
         
          fetch(url, {
             method: 'POST',
@@ -24,7 +24,13 @@ const Form = () => {
             
         })
         .then( (resp)=> resp.json())
-        .then( (dados)=> console.log(dados))
+        .then( (dados)=> {
+          if(dados.status == "inserir"){
+              setNome('');
+              setEmail('');
+          }
+        }
+        )
 
 
     }
