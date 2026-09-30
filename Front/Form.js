@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Alert, View } from 'react-native';
 import { TextInput, Divider, Text, Button } from 'react-native-paper';
 //import { TextInput as X} from 'react-native';
 
@@ -11,28 +11,58 @@ const Form = () => {
 
         const url = "http://192.168.30.91:3000/add";
         //const url = "http://localhost:3000/add";
-        
-         fetch(url, {
+
+        fetch(url, {
             method: 'POST',
-            headers:{
-             'Content-Type':'application/json; charset=UTF-8'
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8'
             },
             body: JSON.stringify({
                 nome: nome,
                 email: email
             }),
-            
+
         })
-        .then( (resp)=> resp.json())
-        .then( (dados)=> {
-          if(dados.status == "inserir"){
-              setNome('');
-              setEmail('');
-          }
-        }
-        )
+            .then((resp) => resp.json())
+            .then((dados) => {
+                if (dados.status == "inserir") {
+                    setNome('');
+                    setEmail('');
+          
+                }
+            }
+            )
 
 
+    }
+
+    function Selecionar() {
+        const url = "http://192.168.30.91:3000/"
+        fetch(url, {
+            method: 'GET'
+
+        })
+            .then((resp) => resp.json())
+            .then((dados) => {
+                console.log(dados);
+             
+            }
+
+            )
+    }
+
+    function Deletar(id) {
+        const url = `http://192.168.30.91:3000/${id}`
+        fetch(url, {
+            method: 'DELETE'
+        })
+            .then((resp) => resp.json())
+            .then((dados) => {
+                console.log(dados);
+             
+            }
+
+            )
     }
 
 
@@ -53,12 +83,19 @@ const Form = () => {
                 />
             </View>
             <Divider style={{ margin: 30 }} />
-            <Button icon="alert" mode="contained" onPress={ ()=> Cadastrar()}>
+            <Button icon="alert" mode="contained" onPress={() => Cadastrar()}>
                 Cadastrar
             </Button>
             <Text variant="bodyMedium">{nome}</Text>
             <Text variant="bodyMedium">{email}</Text>
+          
+           <Button icon="alert" mode="contained" onPress={() => Selecionar()}>
+                Selecionar
+            </Button>
 
+           <Button icon="alert" mode="contained" onPress={() => Deletar('6ab478e7b6a7f662544406b6')}>
+                deletar
+            </Button>
 
 
         </View>
