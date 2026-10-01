@@ -1,11 +1,12 @@
 import React from 'react';
-import { Alert, View } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { TextInput, Divider, Text, Button } from 'react-native-paper';
 //import { TextInput as X} from 'react-native';
 
 const Form = () => {
     const [nome, setNome] = React.useState("");
     const [email, setEmail] = React.useState("");
+    const [dados, setDados] = React.useState([]);
 
     function Cadastrar() {
 
@@ -25,11 +26,7 @@ const Form = () => {
         })
             .then((resp) => resp.json())
             .then((dados) => {
-                if (dados.status == "inserir") {
-                    setNome('');
-                    setEmail('');
-          
-                }
+               console.log(dados)
             }
             )
 
@@ -43,9 +40,10 @@ const Form = () => {
 
         })
             .then((resp) => resp.json())
-            .then((dados) => {
-                console.log(dados);
-             
+            .then((dadox) => {
+                console.log(dadox);
+                setDados(dadox);
+
             }
 
             )
@@ -59,7 +57,7 @@ const Form = () => {
             .then((resp) => resp.json())
             .then((dados) => {
                 console.log(dados);
-             
+
             }
 
             )
@@ -88,14 +86,26 @@ const Form = () => {
             </Button>
             <Text variant="bodyMedium">{nome}</Text>
             <Text variant="bodyMedium">{email}</Text>
-          
-           <Button icon="alert" mode="contained" onPress={() => Selecionar()}>
+
+            <Button icon="alert" mode="contained" onPress={() => Selecionar()}>
                 Selecionar
             </Button>
 
-           <Button icon="alert" mode="contained" onPress={() => Deletar('6ab478e7b6a7f662544406b6')}>
+            <Button icon="alert" mode="contained" onPress={() => Deletar('6ab478e7b6a7f662544406b6')}>
                 deletar
             </Button>
+
+            <FlatList
+
+                data={dados}
+               
+                renderItem={({item})=>(
+                    <View>
+                        <Text>ID:{item._id}</Text>
+                        <Text>ID:{item.nome}</Text>
+                    </View>
+                )}
+            />
 
 
         </View>
